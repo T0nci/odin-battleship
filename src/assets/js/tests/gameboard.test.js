@@ -30,3 +30,18 @@ test("receiveAttack correctly hits a water and a ship spot and refuses an alread
   expect(gameboard.receiveAttack([1, 0])).toBe(false);
   expect(gameboard.receiveAttack([1, 0])).toBe(null);
 });
+
+test("areAllShipsSunk returns correct result", () => {
+  const gameboard = new Gameboard();
+
+  gameboard.placeShip([0, 0], 2, "horizontal");
+  expect(gameboard.areAllShipsSunk()).toBe(false);
+
+  gameboard.receiveAttack([0, 0]);
+  expect(gameboard.areAllShipsSunk()).toBe(false);
+
+  gameboard.receiveAttack([0, 1]);
+  expect(gameboard.areAllShipsSunk()).toBe(true);
+});
+
+// TODO: check if 2 steps are behaving correctly

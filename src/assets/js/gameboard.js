@@ -86,6 +86,18 @@ class Gameboard {
       } else return null;
     }
   }
+
+  areAllShipsSunk() {
+    for (const row of this.gameboard) {
+      for (const spot of row) {
+        if (typeof spot === "object" && spot.hit === false) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 }
 
 export default Gameboard;
