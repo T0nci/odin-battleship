@@ -1,0 +1,19 @@
+{
+  "name": "odin-battleship",
+  "version": "1.0.0",
+  "description": "Battleship is a project where I try to make the Battleship board game with all the techniques that I have gotten while learning JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/T0nci/odin-battleship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/T0nci/odin-battleship/issues"
+  },
+  "homepage": "https://github.com/T0nci/odin-battleship#readme"
+}
