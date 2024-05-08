@@ -1,5 +1,19 @@
 import Ship from "./ship";
 
+function validateCoordinate(coordinate) {
+  if (
+    typeof coordinate[0] !== "number" ||
+    coordinate[0] > 9 ||
+    coordinate[0] < 0 ||
+    typeof coordinate[1] !== "number" ||
+    coordinate[1] > 9 ||
+    coordinate[1] < 0
+  )
+    return false;
+
+  return true;
+}
+
 class Gameboard {
   constructor(shipInfo) {
     this.gameboard = [
@@ -18,12 +32,7 @@ class Gameboard {
 
   placeShip(coordinates, length, direction) {
     if (
-      typeof coordinates[0] !== "number" ||
-      coordinates[0] > 10 ||
-      coordinates[0] < 0 ||
-      typeof coordinates[1] !== "number" ||
-      coordinates[1] > 10 ||
-      coordinates[1] < 0 ||
+      !validateCoordinate(coordinates) ||
       typeof length !== "number" ||
       length < 1
     )
@@ -41,8 +50,7 @@ class Gameboard {
       }
 
       if (
-        coordinate[0] > 9 ||
-        coordinate[1] > 9 ||
+        !validateCoordinate(coordinate) ||
         this.gameboard[coordinate[0]][coordinate[1]] !== 0
       ) {
         return false;
@@ -63,6 +71,8 @@ class Gameboard {
   }
 
   receiveAttack(coordinate) {
+    if (!validateCoordinate(coordinate)) return null;
+
     const spot = this.gameboard[coordinate[0]][coordinate[1]];
     if (typeof spot === "object") {
       if (spot.hit === false) {
