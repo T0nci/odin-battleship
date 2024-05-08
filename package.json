@@ -4,7 +4,8 @@
   "description": "Battleship is a project where I try to make the Battleship board game with all the techniques that I have gotten while learning JavaScript.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,15 @@
   "homepage": "https://github.com/T0nci/odin-battleship#readme",
   "devDependencies": {
     "@eslint/js": "^9.2.0",
+    "css-loader": "^7.1.1",
     "eslint": "^8.57.0",
     "globals": "^15.1.0",
-    "prettier": "3.2.5"
+    "html-webpack-plugin": "^5.6.0",
+    "prettier": "3.2.5",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^5.10.0"
   }
 }
