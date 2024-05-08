@@ -16,3 +16,11 @@ test("placeShip places ship", () => {
   expect(typeof gameboard.gameboard[0][2]).toBe("number");
   expect(typeof gameboard.gameboard[1][0]).toBe("number");
 });
+
+test("receiveAttack correctly hits a water and a ship spot and refuses an already visited spot", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip([0, 0], 2, "horizontal");
+  expect(gameboard.receiveAttack([0, 0])).toBe(true);
+  expect(gameboard.receiveAttack([1, 0])).toBe(false);
+  expect(gameboard.receiveAttack([1, 0])).toBe(null);
+});

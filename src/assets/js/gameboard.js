@@ -61,6 +61,21 @@ class Gameboard {
 
     return true;
   }
+
+  receiveAttack(coordinate) {
+    const spot = this.gameboard[coordinate[0]][coordinate[1]];
+    if (typeof spot === "object") {
+      if (spot.hit === false) {
+        spot.hit = true;
+        return true;
+      } else return null;
+    } else {
+      if (spot === 0) {
+        this.gameboard[coordinate[0]][coordinate[1]] = 1;
+        return false;
+      } else return null;
+    }
+  }
 }
 
 export default Gameboard;
