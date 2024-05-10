@@ -30,11 +30,14 @@ class Gameboard {
     ];
   }
 
-  placeShip(coordinates, length, direction) {
+  placeShip(coordinates, length, direction, name) {
+    const directions = ["horizontal", "vertical"];
     if (
       !validateCoordinate(coordinates) ||
       typeof length !== "number" ||
-      length < 1
+      length < 1 ||
+      !directions.includes(direction) ||
+      typeof name !== "string"
     )
       return false;
 
@@ -45,7 +48,7 @@ class Gameboard {
 
       if (direction === "horizontal") {
         coordinate.push(coordinates[0], coordinates[1] + i);
-      } else if (direction === "vertical") {
+      } else {
         coordinate.push(coordinates[0] + i, coordinates[1]);
       }
 
@@ -59,7 +62,7 @@ class Gameboard {
       finalCoordinates.push(coordinate);
     }
 
-    const ship = new Ship(length);
+    const ship = new Ship(length, name);
     finalCoordinates.forEach((value) => {
       this.gameboard[value[0]][value[1]] = {
         ship,
