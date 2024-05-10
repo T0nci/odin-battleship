@@ -5,10 +5,13 @@ function renderBoards(cBoard, eBoard) {
   currentBoard.textContent = "";
   enemyBoard.textContent = "";
 
-  for (const row of cBoard) {
-    for (const spot of row) {
+  for (let row = 0; row < cBoard.length; row++) {
+    for (let column = 0; column < cBoard[row].length; column++) {
+      const spot = cBoard[row][column];
+
       const div = document.createElement("div");
       div.classList.add("cell");
+      div.dataset.coordinates = `${row},${column}`;
 
       if (spot === 1) div.classList.add("water");
       else if (typeof spot === "object") {
@@ -20,10 +23,13 @@ function renderBoards(cBoard, eBoard) {
     }
   }
 
-  for (const row of eBoard) {
-    for (const spot of row) {
+  for (let row = 0; row < eBoard.length; row++) {
+    for (let column = 0; column < eBoard[row].length; column++) {
+      const spot = eBoard[row][column];
+
       const div = document.createElement("div");
       div.classList.add("cell");
+      div.dataset.coordinates = `${row},${column}`;
 
       if (spot === 1) div.classList.add("water");
       else if (typeof spot === "object" && spot.hit) div.classList.add("ship");
