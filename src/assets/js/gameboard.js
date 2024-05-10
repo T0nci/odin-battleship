@@ -15,7 +15,7 @@ function validateCoordinate(coordinate) {
 }
 
 class Gameboard {
-  constructor(shipInfo) {
+  constructor() {
     this.gameboard = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
