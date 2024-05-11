@@ -80,6 +80,8 @@ class Gameboard {
     if (typeof spot === "object") {
       if (spot.hit === false) {
         spot.hit = true;
+        spot.ship.hit();
+
         return true;
       } else return null;
     } else {

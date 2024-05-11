@@ -49,8 +49,13 @@ test("receiveAttack correctly hits a water and a ship spot and refuses an alread
   const gameboard = new Gameboard();
   gameboard.placeShip([0, 0], 2, "horizontal", "Patrol Boat");
   expect(gameboard.receiveAttack([0, 0])).toBe(true);
+  expect(gameboard.gameboard[0][0].ship.hits).toBe(1);
+
   expect(gameboard.receiveAttack([1, 0])).toBe(false);
+  expect(gameboard.gameboard[0][0].ship.hits).toBe(1);
+
   expect(gameboard.receiveAttack([1, 0])).toBe(null);
+  expect(gameboard.gameboard[0][0].ship.hits).toBe(1);
 });
 
 test("areAllShipsSunk returns correct result", () => {
