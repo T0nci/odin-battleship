@@ -191,15 +191,19 @@ body {
   background-color: #ffffff;
 }
 
-.cell.water {
-  background-color: #aaaaaa;
+.enemy-board > .cell:hover {
+  background-color: #cccccc;
 }
 
-.cell.ship {
+.board > .cell.water {
+  background-color: #999999;
+}
+
+.board > .cell.ship {
   background-color: #ff0000;
 }
 
-.cell.ship-not-hit {
+.board > .cell.ship-not-hit {
   background-color: #00ff00;
 }
 
