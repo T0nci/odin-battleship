@@ -16,4 +16,16 @@ class Player {
   }
 }
 
+class Computer extends Player {
+  constructor(name) {
+    super(name);
+    this.moves = [];
+  }
+
+  randomCoordinates() {
+    return [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)];
+  }
+}
+
 export default Player;
+export { Computer };
