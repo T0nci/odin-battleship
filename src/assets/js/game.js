@@ -23,7 +23,7 @@ function playTurn(coordinates, gameState, player, computer) {
   }
 
   // If it's a miss then pass in empty options
-  DOM.changeGameState(computer, options);
+  DOM.changeGameState(player, computer, options);
   gameState.turn = computer;
   DOM.renderBoards(player.gameboard.gameboard, computer.gameboard.gameboard);
 }

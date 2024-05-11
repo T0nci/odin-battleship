@@ -39,15 +39,17 @@ function renderBoards(cBoard, eBoard) {
   }
 }
 
-function changeGameState(player, info) {
+function changeGameState(prevPlayer, nextPlayer, info) {
   const turnDiv = document.querySelector(".game-state > .turn");
   const gameEventDiv = document.querySelector(".game-state > .game-event");
 
-  turnDiv.textContent = `${player.name}'s Turn`;
+  turnDiv.textContent = `${nextPlayer.name}'s Turn`;
 
-  if (info.hit) gameEventDiv.textContent = `${info.hit} was hit!`;
-  else if (info.sunk) gameEventDiv.textContent = `${info.sunk} was sunk!`;
-  else gameEventDiv.textContent = "Miss!";
+  if (info.hit)
+    gameEventDiv.textContent = `${prevPlayer.name} hit the ${info.hit}!`;
+  else if (info.sunk)
+    gameEventDiv.textContent = `${prevPlayer.name} sunk the ${info.sunk}!`;
+  else gameEventDiv.textContent = `${prevPlayer.name} missed!`;
 }
 
 export default {
