@@ -3,8 +3,34 @@ import "./../css/style.css";
 import Ship from "./ship";
 import Gameboard from "./gameboard";
 import Player from "./player";
+import { Computer } from "./player";
 
 import DOM from "./dom";
+
+function playComputerTurn(gameState, player, computer) {
+  const options = {};
+  let coordinates = [];
+  let attack = null;
+  do {
+    coordinates = computer.randomCoordinates();
+
+    attack = player.gameboard.receiveAttack(coordinates);
+  } while (attack === null);
+
+  if (attack === true) {
+    const ship =
+      player.gameboard.gameboard[coordinates[0]][coordinates[1]].ship;
+
+    if (ship.isSunk()) {
+      options.sunk = ship.name;
+    } else options.hit = ship.name;
+  }
+
+  // If it's a miss then pass in empty options
+  DOM.changeGameState(computer, player, options);
+  gameState.turn = player;
+  DOM.renderBoards(player.gameboard.gameboard, computer.gameboard.gameboard);
+}
 
 function playTurn(coordinates, gameState, player, computer) {
   if (gameState.turn !== player) return;
@@ -26,11 +52,16 @@ function playTurn(coordinates, gameState, player, computer) {
   DOM.changeGameState(player, computer, options);
   gameState.turn = computer;
   DOM.renderBoards(player.gameboard.gameboard, computer.gameboard.gameboard);
+
+  playComputerTurn(gameState, player, computer);
 }
 
 function playGame() {
   const player = new Player("1");
-  const computer = new Player("2");
+  const computer = new Computer("Computer");
+
+  document.querySelector(".game-state > .turn").textContent =
+    `${player.name}'s Turn`;
 
   player.gameboard.placeShip([0, 0], 2, "horizontal", "Patrol Boat");
   player.gameboard.placeShip([1, 0], 3, "horizontal", "Submarine");
