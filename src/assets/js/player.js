@@ -23,7 +23,7 @@ class Computer extends Player {
   }
 
   randomCoordinates() {
-    return [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)];
+    return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
   }
 }
 
