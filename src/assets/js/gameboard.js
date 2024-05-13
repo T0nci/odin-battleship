@@ -14,6 +14,28 @@ function validateCoordinate(coordinate) {
   return true;
 }
 
+const ships = {
+  Carrier: 5,
+  Battleship: 4,
+  Destroyer: 3,
+  Submarine: 3,
+  "Patrol Boat": 2,
+};
+
+function createRandomShip(name) {
+  const length = ships[name];
+
+  const direction =
+    Math.floor(Math.random() * 2) < 1 ? "horizontal" : "vertical";
+
+  const coordinates = [
+    Math.floor(Math.random() * 10),
+    Math.floor(Math.random() * 10),
+  ];
+
+  return [coordinates, length, direction, name];
+}
+
 class Gameboard {
   constructor() {
     this.gameboard = [
@@ -102,6 +124,33 @@ class Gameboard {
     }
 
     return true;
+  }
+
+  resetBoard() {
+    this.gameboard = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+  }
+
+  randomizeShips() {
+    this.resetBoard();
+
+    for (const ship in ships) {
+      let shipPlaced = false;
+
+      while (shipPlaced === false) {
+        shipPlaced = this.placeShip(...createRandomShip(ship));
+      }
+    }
   }
 }
 

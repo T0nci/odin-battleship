@@ -70,3 +70,23 @@ test("areAllShipsSunk returns correct result", () => {
   gameboard.receiveAttack([0, 1]);
   expect(gameboard.areAllShipsSunk()).toBe(true);
 });
+
+test("resetBoard resets the board", () => {
+  const gameboard = new Gameboard();
+
+  gameboard.placeShip([0, 0], 2, "horizontal", "Patrol Boat");
+  gameboard.resetBoard();
+
+  expect(gameboard.gameboard[0][0]).toBe(0);
+  expect(gameboard.gameboard[0][1]).toBe(0);
+});
+
+test("randomizeShips randomizes ships", () => {
+  const gameboard = new Gameboard();
+
+  expect(gameboard.areAllShipsSunk()).toBe(true);
+
+  gameboard.randomizeShips();
+
+  expect(gameboard.areAllShipsSunk()).toBe(false);
+});
