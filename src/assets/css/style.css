@@ -270,3 +270,7 @@ body {
 .place-ships > .ready:active {
   background-color: #00b300;
 }
+
+.disabled {
+  opacity: 0.5;
+}

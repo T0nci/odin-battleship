@@ -78,58 +78,59 @@ function playGame() {
   const player = new Player("1");
   const computer = new Computer("Computer");
 
-  document.querySelector(".game-state > .turn").textContent =
-    `${player.name}'s Turn`;
-
-  player.gameboard.placeShip([0, 0], 2, "horizontal", "Patrol Boat");
-  player.gameboard.placeShip([1, 0], 3, "horizontal", "Submarine");
-  player.gameboard.placeShip([2, 0], 3, "horizontal", "Destroyer");
-  player.gameboard.placeShip([0, 9], 4, "vertical", "Battleship");
-  player.gameboard.placeShip([3, 0], 5, "horizontal", "Carrier");
-  player.gameboard.receiveAttack([0, 0]);
-  player.gameboard.receiveAttack([0, 1]);
-  player.gameboard.receiveAttack([1, 0]);
-  player.gameboard.receiveAttack([1, 1]);
-  player.gameboard.receiveAttack([1, 2]);
-  player.gameboard.receiveAttack([2, 0]);
-  player.gameboard.receiveAttack([2, 1]);
-  player.gameboard.receiveAttack([2, 2]);
-  player.gameboard.receiveAttack([3, 0]);
-  player.gameboard.receiveAttack([3, 1]);
-  player.gameboard.receiveAttack([3, 2]);
-  player.gameboard.receiveAttack([3, 3]);
-  player.gameboard.receiveAttack([3, 4]);
-  player.gameboard.receiveAttack([0, 9]);
-  player.gameboard.receiveAttack([1, 9]);
-  player.gameboard.receiveAttack([2, 9]);
-
-  computer.gameboard.placeShip([0, 0], 2, "horizontal", "Patrol Boat");
-  computer.gameboard.placeShip([1, 0], 3, "horizontal", "Submarine");
-  computer.gameboard.placeShip([2, 0], 3, "horizontal", "Destroyer");
-  computer.gameboard.placeShip([0, 9], 4, "vertical", "Battleship");
-  computer.gameboard.placeShip([3, 0], 5, "horizontal", "Carrier");
-  computer.gameboard.receiveAttack([0, 8]);
-  computer.gameboard.receiveAttack([8, 2]);
-  computer.gameboard.receiveAttack([3, 3]);
-  computer.gameboard.receiveAttack([6, 4]);
-
   DOM.renderBoards(player.gameboard.gameboard, computer.gameboard.gameboard);
 
   const gameState = { turn: player };
 
-  // When ready button gets clicked start the game
-  document
-    .querySelector(".boards > .board-space > .enemy-board")
-    .addEventListener("click", (e) => {
-      // Makes sure the target is a cell and not a border or gap
-      if (!e.target.classList.contains("cell")) return;
+  document.querySelector(".game-state > .turn").textContent =
+    `${player.name}'s Turn`;
 
-      playTurn(
-        e.target.dataset.coordinates.split(",").map((value) => parseInt(value)),
-        gameState,
-        player,
-        computer,
+  document
+    .querySelector(".place-ships > .randomize")
+    .addEventListener("click", () => {
+      // Called it like this because it will benefit not repeating code
+      // when creating 2 player mode
+      gameState.turn.gameboard.randomizeShips();
+
+      DOM.renderBoards(
+        player.gameboard.gameboard,
+        computer.gameboard.gameboard,
       );
+    });
+
+  document
+    .querySelector(".place-ships > .ready")
+    .addEventListener("click", (e) => {
+      // Disable the buttons so the user can't interfere
+      const ready = e.currentTarget;
+      const randomize = ready.parentNode.querySelector(".randomize");
+      ready.disabled = true;
+      randomize.disabled = true;
+      ready.classList.add("disabled");
+      randomize.classList.add("disabled");
+
+      computer.gameboard.randomizeShips();
+
+      DOM.renderBoards(
+        player.gameboard.gameboard,
+        computer.gameboard.gameboard,
+      );
+
+      document
+        .querySelector(".boards > .board-space > .enemy-board")
+        .addEventListener("click", (e) => {
+          // Makes sure the target is a cell and not a border or gap
+          if (!e.target.classList.contains("cell")) return;
+
+          playTurn(
+            e.target.dataset.coordinates
+              .split(",")
+              .map((value) => parseInt(value)),
+            gameState,
+            player,
+            computer,
+          );
+        });
     });
 }
 
