@@ -69,7 +69,9 @@ function playTurn(coordinates, gameState, player, computer) {
   gameState.turn = computer;
   DOM.renderBoards(player.gameboard.gameboard, computer.gameboard.gameboard);
 
-  playComputerTurn(gameState, player, computer);
+  setTimeout(() => {
+    playComputerTurn(gameState, player, computer);
+  }, 2 * 1000);
 }
 
 function playGame() {
