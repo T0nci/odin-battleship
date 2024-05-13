@@ -7,6 +7,10 @@ import { Computer } from "./player";
 
 import DOM from "./dom";
 
+function checkIfLost(player) {
+  return player.gameboard.areAllShipsSunk();
+}
+
 function playComputerTurn(gameState, player, computer) {
   const options = {};
   let coordinates = [];
@@ -24,6 +28,12 @@ function playComputerTurn(gameState, player, computer) {
     if (ship.isSunk()) {
       options.sunk = ship.name;
     } else options.hit = ship.name;
+  }
+
+  // If computer won
+  if (checkIfLost(player)) {
+    DOM.endGame(computer, player, options);
+    return;
   }
 
   // If it's a miss then pass in empty options
@@ -48,6 +58,12 @@ function playTurn(coordinates, gameState, player, computer) {
     } else options.hit = ship.name;
   }
 
+  // If player won
+  if (checkIfLost(computer)) {
+    DOM.endGame(player, computer, options);
+    return;
+  }
+
   // If it's a miss then pass in empty options
   DOM.changeGameState(player, computer, options);
   gameState.turn = computer;
@@ -70,8 +86,20 @@ function playGame() {
   player.gameboard.placeShip([3, 0], 5, "horizontal", "Carrier");
   player.gameboard.receiveAttack([0, 0]);
   player.gameboard.receiveAttack([0, 1]);
-  player.gameboard.receiveAttack([0, 2]);
-  player.gameboard.receiveAttack([0, 0]);
+  player.gameboard.receiveAttack([1, 0]);
+  player.gameboard.receiveAttack([1, 1]);
+  player.gameboard.receiveAttack([1, 2]);
+  player.gameboard.receiveAttack([2, 0]);
+  player.gameboard.receiveAttack([2, 1]);
+  player.gameboard.receiveAttack([2, 2]);
+  player.gameboard.receiveAttack([3, 0]);
+  player.gameboard.receiveAttack([3, 1]);
+  player.gameboard.receiveAttack([3, 2]);
+  player.gameboard.receiveAttack([3, 3]);
+  player.gameboard.receiveAttack([3, 4]);
+  player.gameboard.receiveAttack([0, 9]);
+  player.gameboard.receiveAttack([1, 9]);
+  player.gameboard.receiveAttack([2, 9]);
 
   computer.gameboard.placeShip([0, 0], 2, "horizontal", "Patrol Boat");
   computer.gameboard.placeShip([1, 0], 3, "horizontal", "Submarine");

@@ -52,7 +52,33 @@ function changeGameState(prevPlayer, nextPlayer, info) {
   else gameEventDiv.textContent = `${prevPlayer.name} missed!`;
 }
 
+function endGame(winner, loser, info) {
+  // Announce the winner
+  const turnDiv = document.querySelector(".game-state > .turn");
+  const gameEventDiv = document.querySelector(".game-state > .game-event");
+
+  turnDiv.textContent = `${winner.name} is the winner!`;
+
+  gameEventDiv.textContent = `${winner.name} sunk the ${info.sunk}!`;
+
+  // Disable the clicking(by removing the element with the event listener)
+  const enemyBoard = document.querySelector(".board-space > .enemy-board");
+  const enemySpace = enemyBoard.parentNode;
+
+  enemySpace.removeChild(enemyBoard);
+
+  const enemyBoardCopy = document.createElement("div");
+  enemyBoardCopy.classList.add("board", "enemy-board");
+
+  enemySpace.appendChild(enemyBoardCopy);
+
+  if (winner.name === "Computer")
+    renderBoards(loser.gameboard.gameboard, winner.gameboard.gameboard);
+  else renderBoards(winner.gameboard.gameboard, loser.gameboard.gameboard);
+}
+
 export default {
   renderBoards,
   changeGameState,
+  endGame,
 };
