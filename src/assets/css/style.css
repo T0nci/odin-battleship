@@ -319,3 +319,18 @@ body {
   width: 20px;
   height: 20px;
 }
+
+.switch-screen {
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #00ff00;
+  font-size: 2rem;
+  font-weight: bold;
+}

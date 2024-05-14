@@ -77,8 +77,19 @@ function endGame(winner, loser, info) {
   else renderBoards(winner.gameboard.gameboard, loser.gameboard.gameboard);
 }
 
+function switchScreen() {
+  const switchScreenDiv = document.querySelector(".switch-screen");
+
+  if (switchScreenDiv.style.display === "none") {
+    switchScreenDiv.style.display = "flex";
+  } else {
+    switchScreenDiv.style.display = "none";
+  }
+}
+
 export default {
   renderBoards,
   changeGameState,
   endGame,
+  switchScreen,
 };
