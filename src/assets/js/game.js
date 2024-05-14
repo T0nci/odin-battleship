@@ -16,8 +16,18 @@ function playComputerTurn(gameState, player, computer) {
   let coordinates = [];
   let attack = null;
   do {
-    coordinates = computer.randomCoordinates();
+    if (computer.moves.length > 0) {
+      const move = computer.moves.shift();
 
+      if (!move.ship.isSunk()) {
+        coordinates = move.coordinates;
+      }
+    } else {
+      // If there aren't any moves in the computer's queue
+      coordinates = computer.randomCoordinates();
+    }
+
+    // Attack once we get random coordinates or coordinates from the queue
     attack = player.gameboard.receiveAttack(coordinates);
   } while (attack === null);
 
@@ -27,7 +37,27 @@ function playComputerTurn(gameState, player, computer) {
 
     if (ship.isSunk()) {
       options.sunk = ship.name;
-    } else options.hit = ship.name;
+    } else {
+      options.hit = ship.name;
+      computer.moves.push(
+        {
+          ship,
+          coordinates: [coordinates[0] - 1, coordinates[1]],
+        },
+        {
+          ship,
+          coordinates: [coordinates[0] + 1, coordinates[1]],
+        },
+        {
+          ship,
+          coordinates: [coordinates[0], coordinates[1] - 1],
+        },
+        {
+          ship,
+          coordinates: [coordinates[0], coordinates[1] + 1],
+        },
+      );
+    }
   }
 
   // If computer won

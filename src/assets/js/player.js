@@ -19,6 +19,7 @@ class Player {
 class Computer extends Player {
   constructor(name) {
     super(name);
+    // moves is a queue for adjacent ship attacks - smarter AI
     this.moves = [];
   }
 
