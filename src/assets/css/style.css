@@ -321,16 +321,19 @@ body {
 }
 
 .switch-screen {
+  border: none;
+  background-color: #00ff00;
+}
+
+.switch-screen::backdrop {
+  background-color: #00ff00;
+}
+
+.switch-screen > div {
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-
-  background-color: #00ff00;
   font-size: 2rem;
   font-weight: bold;
 }

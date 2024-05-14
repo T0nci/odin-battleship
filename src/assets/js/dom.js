@@ -77,8 +77,8 @@ function endGame(winner, loser, info) {
   else renderBoards(winner.gameboard.gameboard, loser.gameboard.gameboard);
 }
 
-function switchReadyButton(e, action) {
-  const ready = e.currentTarget;
+function switchReadyButton(action) {
+  const ready = document.querySelector(".place-ships > .ready");
   const randomize = ready.parentNode.querySelector(".randomize");
 
   if (action === "disable") {
@@ -99,12 +99,12 @@ function switchReadyButton(e, action) {
 }
 
 function switchScreen() {
-  const switchScreenDiv = document.querySelector(".switch-screen");
+  const switchScreenDialog = document.querySelector(".switch-screen");
 
-  if (switchScreenDiv.style.display === "none") {
-    switchScreenDiv.style.display = "flex";
+  if (switchScreenDialog.getAttribute("open") !== null) {
+    switchScreenDialog.close();
   } else {
-    switchScreenDiv.style.display = "none";
+    switchScreenDialog.showModal();
   }
 }
 
