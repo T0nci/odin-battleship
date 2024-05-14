@@ -7,6 +7,39 @@
   </head>
   <body>
     <div class="container">
+      <dialog class="choose-mode">
+        <form>
+          <fieldset>
+            <legend>Choose mode</legend>
+
+            <div>
+              <input
+                type="radio"
+                name="mode"
+                id="singleplayer"
+                value="singleplayer"
+                checked
+              />
+              <label for="singleplayer">Singleplayer</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                name="mode"
+                id="multiplayer"
+                value="multiplayer"
+              />
+              <label for="multiplayer">Multiplayer</label>
+            </div>
+          </fieldset>
+
+          <div>
+            <button type="submit">Play</button>
+          </div>
+        </form>
+      </dialog>
+
       <div class="place-ships">
         <button class="randomize">Randomize</button>
         <button class="ready">Ready</button>
