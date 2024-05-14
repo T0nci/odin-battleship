@@ -106,7 +106,7 @@ function playGame() {
       const randomize = ready.parentNode.querySelector(".randomize");
       ready.disabled = true;
       randomize.disabled = true;
-      ready.classList.add("disabled");
+      ready.classList.add("disabled", "clicked");
       randomize.classList.add("disabled");
 
       computer.gameboard.randomizeShips();

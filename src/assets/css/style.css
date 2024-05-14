@@ -260,14 +260,26 @@ body {
 }
 
 .place-ships > .ready {
-  background-color: #00ca00;
+  background-color: #ff0000;
 }
 
 .place-ships > .ready:hover {
-  background-color: #00c000;
+  background-color: #f50000;
 }
 
 .place-ships > .ready:active {
+  background-color: #eb0000;
+}
+
+.place-ships > .ready.clicked {
+  background-color: #00ca00;
+}
+
+.place-ships > .ready.clicked:hover {
+  background-color: #00c000;
+}
+
+.place-ships > .ready.clicked:active {
   background-color: #00b300;
 }
 
