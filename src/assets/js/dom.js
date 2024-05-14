@@ -77,6 +77,27 @@ function endGame(winner, loser, info) {
   else renderBoards(winner.gameboard.gameboard, loser.gameboard.gameboard);
 }
 
+function switchReadyButton(e, action) {
+  const ready = e.currentTarget;
+  const randomize = ready.parentNode.querySelector(".randomize");
+
+  if (action === "disable") {
+    ready.disabled = true;
+    randomize.disabled = true;
+  } else {
+    ready.disabled = false;
+    randomize.disabled = false;
+  }
+
+  if (action === "enable") {
+    ready.classList.remove("disabled", "clicked");
+    randomize.classList.remove("disabled");
+  } else {
+    ready.classList.add("disabled", "clicked");
+    randomize.classList.add("disabled");
+  }
+}
+
 function switchScreen() {
   const switchScreenDiv = document.querySelector(".switch-screen");
 
@@ -92,4 +113,5 @@ export default {
   changeGameState,
   endGame,
   switchScreen,
+  switchReadyButton,
 };
