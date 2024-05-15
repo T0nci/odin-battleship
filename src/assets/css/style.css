@@ -156,7 +156,7 @@ body {
 .container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .container > div {
